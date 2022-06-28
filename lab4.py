@@ -120,6 +120,26 @@ class Airline:
     def add_line_to_list(line):
         Airline.lines_list.append(line)
 
+    def __str__(self):
+        return "Destination - {}\nFlight - {}\nPlane - {}\nTime - {}\nDay - {}".format(
+            self.__destination, self.__flight, self.__plane, self.__flight_time, self.__week_day)
+
+    def __eq__(self, other):
+        return (self.__destination == other.__destination &
+                self.__flight == other.__flight &
+                self.__plane == other.__plane &
+                self.__flight_time == other.__flight_time &
+                self.__week_day == other.__week_day)
+
+    def __lt__(self, other):
+        return int(self.__flight) < int(other.__flight)
+
+    def __gt__(self, other):
+        return int(self.__flight) > int(other.__flight)
+
+    def __iadd__(self, other):
+        self.lines_list.append(other)
+
 
 def create_line():
     destination = str(input('Type destination: '))
@@ -134,6 +154,7 @@ def create_line():
     line.set_flight_time(flight_time)
     line.set_week_day(week_day)
     Airline.add_line_to_list(line)
+    print("Airaline add to list:\n" + str(line))
 
 
 option = 1
